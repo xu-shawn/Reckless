@@ -583,6 +583,10 @@ fn search<const PV: bool>(td: &mut ThreadData, mut alpha: i32, mut beta: i32, de
         }
         // Full Depth Search (FDS)
         else if !PV || move_count > 1 {
+            if move_count > 1 && cut_node && score <= best_score + 10 - 2 * new_depth {
+                new_depth -= 1;
+            }
+
             score = -search::<false>(td, -alpha - 1, -alpha, new_depth, !cut_node);
         }
 
