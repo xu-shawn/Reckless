@@ -550,7 +550,7 @@ fn search<const PV: bool>(td: &mut ThreadData, mut alpha: i32, mut beta: i32, de
             }
 
             if tt_pv && !is_quiet {
-                reduction = 1000.max(reduction - 1000);
+                reduction = 1000.min(reduction - 1000);
             }
 
             let reduced_depth = (new_depth - reduction / 1024).clamp(0, new_depth);
